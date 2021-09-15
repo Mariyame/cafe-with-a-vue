@@ -1,7 +1,32 @@
 <script>
 export default {
 	name: "MenuItem",
-	props: ["addToShoppingCart", "image", "inStock", "name", "price", "quantity"],
+	props: {
+		addToShoppingCart: {
+			type: Function,
+			required: true
+		},
+		image: {
+			type: Object,
+			required: true
+		},
+		inStock: {
+			type: Boolean,
+			required: true
+		},
+		name: {
+			type: String,
+			required: true
+		},
+		price: {
+			type: Number,
+			required: true
+		},
+		quantity: {
+			type: Number,
+			default: 1
+		}
+	},
 	data() {
 		return {
 			onSale: false
@@ -36,7 +61,7 @@ export default {
 			<div>
 				<label for="add-item-quantity">Quantité : {{ quantity }}</label>
 				<input  id="add-item-quantity" type="number" />
-				<button @click="addToShoppingCart(quantity)">
+				<button  @click="addToShoppingCart(quantity)">
 					Ajouter au panier
 				</button>
 			</div>
