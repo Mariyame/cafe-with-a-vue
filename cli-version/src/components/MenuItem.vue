@@ -1,6 +1,6 @@
+
 <script>
 import BaseButton from "./BaseButton.vue"
-
 export default {
 	name: "MenuItem",
 	components: {
@@ -25,17 +25,12 @@ export default {
 		},
 		quantity: {
 			type: Number,
-			default: 1
+			defaut: 1
 		}
 	},
 	data() {
 		return {
 			onSale: false
-		}
-	},
-	methods: {
-		updateShoppingCart(quantity) {
-			this.$emit('add-items-to-cart', quantity)
 		}
 	},
 	computed: {
@@ -45,6 +40,11 @@ export default {
 			} else {
 				return this.price
 			}
+		}
+	},
+	methods: {
+		updateShoppingCart(quantity) {
+			this.$emit("add-items-to-cart", quantity)
 		}
 	},
 	beforeMount() {
@@ -61,7 +61,10 @@ export default {
 		<img class="menu-item__image" :src="image.source" :alt="image.alt" />
 		<div>
 			<h3>{{ name }}</h3>
-			<p>Prix : {{ generatedPrice }}</p>
+			<p>
+				Prix: {{ generatedPrice }}
+				<span v-if="onSale">(10% de réduction !)</span>
+			</p>
 			<p v-if="inStock">En stock</p>
 			<p v-else>En rupture de stock</p>
 			<div>
@@ -75,16 +78,14 @@ export default {
 	</div>
 </template>
 
-<style>
-
-  .menu-item {
-    display: flex;
-    width: 500px;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  
-  .menu-item__image {
-    max-width: 300px;
-  }
+<style lang="scss">
+.menu-item {
+	display: flex;
+	width: 500px;
+	justify-content: space-between;
+	margin-bottom: 30px;
+	&__image {
+		max-width: 300px;
+	}
+}
 </style>
